@@ -31,9 +31,21 @@ INSERT INTO userTbl VALUES
 ('user8','12345','notcomplex8@gmail.com','1999','0','0','0',null),
 ('user9','12345','notcomplex9@gmail.com','1999','0','0','0',null);
 
+CREATE TABLE topicTbl (
+	topic_id int IDENTITY(1,1) PRIMARY KEY,
+	title text,
+	content text
+);
+
+INSERT INTO topicTbl VALUES
+('Vote for banning user','Free our people'),
+('Vote for banning admin','Free our people'),
+('Vote for promote admin','Free our people');
+
 CREATE TABLE postTbl (
 	post_id int IDENTITY(1,1) PRIMARY KEY,
 	user_id int FOREIGN KEY REFERENCES userTbl(user_id) NOT NULL,
+	topic_id int FOREIGN KEY REFERENCES topicTbl(topic_id) NOT NULL,
 	title text,
 	content text,
 	isHidden bit,
@@ -42,27 +54,15 @@ CREATE TABLE postTbl (
 );
 
 INSERT INTO postTbl VALUES
-('1','Admin content','Anyone are free to vote','0','0',null),
-('1','User content','Anyone are free to vote','0','0',null),
-('1','New Users','Anyone are free to vote','0','0',null),
-('1','Account creation','Anyone are free to vote','0','0',null);
-
-CREATE TABLE topicTbl (
-	topic_id int IDENTITY(1,1) PRIMARY KEY,
-	post_id int FOREIGN KEY REFERENCES userTbl(user_id)  NOT NULL,
-	title text,
-	content text
-);
-
-INSERT INTO topicTbl VALUES
-('1','Vote for banning user','Free our people'),
-('2','Vote for banning admin','Free our people'),
-('3','Vote for promote admin','Free our people');
+('1','1','Admin content','Anyone are free to vote','0','0',null),
+('1','1','User content','Anyone are free to vote','0','0',null),
+('1','1','New Users','Anyone are free to vote','0','0',null),
+('1','1','Account creation','Anyone are free to vote','0','0',null);
 
 CREATE TABLE voteTbl (
 	vote_id int IDENTITY(1,1) PRIMARY KEY,
 	user_id int FOREIGN KEY REFERENCES userTbl(user_id) NOT NULL,
-	topic_id int FOREIGN KEY REFERENCES topicTbl(topic_id) NOT NULL,
+	post_id int FOREIGN KEY REFERENCES postTbl(post_id),
 	vote_type numeric(2,0) NOT NULL,
 );
 
@@ -92,7 +92,7 @@ CREATE TABLE commentTbl (
 	post_id int FOREIGN KEY REFERENCES postTbl(post_id) NOT NULL,
 	content text,
 	image varbinary(max),
-	respondingToCommmentId int,
+	parent_id int,
 );
 
 INSERT INTO commentTbl VALUES
