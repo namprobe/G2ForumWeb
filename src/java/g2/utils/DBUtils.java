@@ -20,7 +20,7 @@ public class DBUtils {
         String port = "1433";
         String uid = "sa";
         String pwd = "12345";
-        String db = "G2Forum";
+        String db = "G2ForumWeb";
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         String url = "jdbc:sqlserver://" + ip + ":" + port + ";databasename=" + db + ";";
         Class.forName(driver);
