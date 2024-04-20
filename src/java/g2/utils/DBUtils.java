@@ -24,7 +24,7 @@ public class DBUtils {
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         String url = "jdbc:sqlserver://" + ip + ":" + port + ";databasename=" + db + ";";
         Class.forName(driver);
-        cn = DriverManager.getConnection(url, uid, port);
+        cn = DriverManager.getConnection(url, uid, pwd);
         return cn;
     }
 }
