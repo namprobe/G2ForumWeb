@@ -4,6 +4,7 @@
     Author     : APC
 --%>
 
+<%@page import="g2.topicTbl.topicDAO"%>
 <%@page import="g2.topicTbl.topicDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -52,7 +53,6 @@
         <div id="body">
             <div id="postTable">
 
-
             </div>
             <div id="topicTable">
                 <%
@@ -61,18 +61,48 @@
                         if (list_topic != null && list_topic.size() > 0) {
                 %>
                 <table border="1">
+                    <%
+                        for (topicDTO t : list_topic) {
+                    %>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th><%= t.getTitle()%></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
+                            <td>Read more</td>
                         </tr>
                     </tbody>
+                    <%
+                        };
+                    %>
                 </table>
-
+                <%
+                    }
+                } else {
+                    topicDAO t_dao = new topicDAO();
+                    List<topicDTO> list_topic = (List<topicDTO>) t_dao.getTopicData();
+                    if (list_topic != null && list_topic.size() > 0) {
+                %>
+                <table border="1">
+                    <%
+                        for (topicDTO t : list_topic) {
+                    %>
+                    <thead>
+                        <tr>
+                            <th><%= t.getTitle()%></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Read more</td>
+                        </tr>
+                    </tbody>
+                    <%
+                        };
+                    %>
+                </table>
 
                 <%
                         }
