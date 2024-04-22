@@ -141,7 +141,7 @@ public class userDAO {
         return false;
     }
 
-    public List<userDTO> getUsers(String userName)
+    public List<userDTO> getUsers(String searchValue)
             throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -152,10 +152,11 @@ public class userDAO {
             if (con != null) {
                 String query = "SELECT * FROM userTbl WHERE username like ?";
                 stm = con.prepareStatement(query);
-                stm.setString(1, "%" + userName + "%");
+                stm.setString(1, "%" + searchValue + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int userID = rs.getInt("user_id");
+                    String username = rs.getString("username");
                     String password = rs.getString("password");
                     String email = rs.getString("email");
                     Date birthdate = rs.getDate("birthdate");
@@ -163,7 +164,7 @@ public class userDAO {
                     boolean isDelete = rs.getBoolean("isDelete");
                     boolean isBanned = rs.getBoolean("isBanned");
                     byte[] avatar = rs.getBytes("avatar");
-                    users.add(new userDTO(userID, userName, password, email, birthdate, isMod, isDelete, isBanned, avatar));
+                    users.add(new userDTO(userID, username, password, email, birthdate, isMod, isDelete, isBanned, avatar));
                 }
             }
         } finally {
