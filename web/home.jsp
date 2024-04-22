@@ -87,7 +87,8 @@
                     }
                 } else {
                     topicDAO t_dao = new topicDAO();
-                    List<topicDTO> list_topic = (List<topicDTO>) t_dao.getTopicData();
+                    List<topicDTO> list_topic = null;
+//List<topicDTO>) t_dao.getTopicData();
                     if (list_topic != null && list_topic.size() > 0) {
                 %>
                 <table border="1">
