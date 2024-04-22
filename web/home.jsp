@@ -4,6 +4,8 @@
     Author     : APC
 --%>
 
+<%@page import="g2.postTbl.postDAO"%>
+<%@page import="g2.postTbl.postDTO"%>
 <%@page import="g2.topicTbl.topicDAO"%>
 <%@page import="g2.topicTbl.topicDTO"%>
 <%@page import="java.util.List"%>
@@ -14,6 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--<link rel="stylesheet" href="myStyle.css">-->
+        <link rel="stylesheet" href="myStyle.css">
         <script src="https://kit.fontawesome.com/aed3462b10.js" crossorigin="anonymous"></script>
         <title>Home Page</title>
     </head>
@@ -53,7 +56,69 @@
         </header>
         <div id="body">
             <div id="postTable">
+                <%
+                    //<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 
+                    //<c:if test="${not empty listLec}">
+                    //<c:forEach items="${requestScope.listLec}" var="lec">
+                    //${lec.course.courseName}
+                    if (request.getParameter("txtSearchPostTopic") != null) {
+                        List<postDTO> list_post = (List<postDTO>) request.getAttribute("POSTS");
+                        if (list_post != null && list_post.size() > 0) {
+                %>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            for (postDTO p : list_post) {
+                        %>
+                        <tr>
+                            <td><%= p.getPost_id()%></td>
+                            <td><%= p.getTitle()%></td>
+                            <td><%= p.getContent()%></td>
+                        </tr>
+                        <%
+                            };
+                        %>
+                    </tbody>
 
+                </table>
+                <%
+                    }
+                } else {
+                    postDAO p_dao = new postDAO();
+                    List<postDTO> list_post = (List<postDTO>) p_dao.getPostData();
+                    if (list_post != null && list_post.size() > 0) {
+                %>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Content</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            for (postDTO p : list_post) {
+                        %>
+                        <tr>
+                            <td><%= p.getTitle()%></td>
+                            <td><%= p.getContent()%></td>
+                        </tr>
+                        <%
+                            };
+                        %>
+                    </tbody>
+                </table>
+                <%
+                        }
+                    }
+                %>
             </div>
             <div id="topicTable">
                 <%
