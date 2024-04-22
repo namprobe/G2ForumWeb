@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="myStyle.css">
+        <!--<link rel="stylesheet" href="myStyle.css">-->
         <script src="https://kit.fontawesome.com/aed3462b10.js" crossorigin="anonymous"></script>
         <title>Home Page</title>
     </head>
@@ -66,50 +66,55 @@
                         if (list_topic != null && list_topic.size() > 0) {
                 %>
                 <table border="1">
-                    <%
-                        for (topicDTO t : list_topic) {
-                    %>
                     <thead>
                         <tr>
-                            <th><%= t.getTitle()%></th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <%
+                            for (topicDTO t : list_topic) {
+                        %>
                         <tr>
-                            <td>Read more</td>
+                            <td><%= t.getTopic_id()%></td>
+                            <td><%= t.getTitle()%></td>
+                            <td><%= t.getContent()%></td>
                         </tr>
+                        <%
+                            };
+                        %>
                     </tbody>
-                    <%
-                        };
-                    %>
+
                 </table>
                 <%
                     }
                 } else {
                     topicDAO t_dao = new topicDAO();
-                    List<topicDTO> list_topic = null;
-//List<topicDTO>) t_dao.getTopicData();
+                    List<topicDTO> list_topic = (List<topicDTO>) t_dao.getTopicData();
                     if (list_topic != null && list_topic.size() > 0) {
                 %>
                 <table border="1">
-                    <%
-                        for (topicDTO t : list_topic) {
-                    %>
                     <thead>
                         <tr>
-                            <th><%= t.getTitle()%></th>
+                            <th>Title</th>
+                            <th>Content</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <%
+                            for (topicDTO t : list_topic) {
+                        %>
                         <tr>
-                            <td>Read more</td>
+                            <td><%= t.getTitle()%></td>
+                            <td><%= t.getContent()%></td>
                         </tr>
+                        <%
+                            };
+                        %>
                     </tbody>
-                    <%
-                        };
-                    %>
                 </table>
-
                 <%
                         }
                     }

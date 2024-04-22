@@ -43,7 +43,7 @@ public class SearchTopicServlet extends HttpServlet {
         try {
             String searchValue = request.getParameter("txtSearchTopic");
             topicDAO t_dao = new topicDAO();
-            List<topicDTO> list_topic = t_dao.getTopicByName(searchValue);
+            List<topicDTO> list_topic = (List<topicDTO>) t_dao.getTopicByName(searchValue);
             request.setAttribute("TOPICS", list_topic);
             url = HOME_PAGE;
         } catch (ClassNotFoundException ex) {

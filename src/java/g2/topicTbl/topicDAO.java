@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,11 +19,12 @@ import java.util.List;
  */
 public class topicDAO {
 
-    public List<topicDTO> getTopicByName(String searchTopicValue) throws SQLException, ClassNotFoundException, Exception {
+    public List<topicDTO> getTopicByName(String searchTopicValue)
+            throws SQLException, ClassNotFoundException, Exception {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        List<topicDTO> list_topic = null;
+        List<topicDTO> list_topic = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
             if (con != null) {
@@ -55,7 +57,7 @@ public class topicDAO {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        List<topicDTO> list_topic = null;
+        List<topicDTO> list_topic = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
             if (con != null) {
