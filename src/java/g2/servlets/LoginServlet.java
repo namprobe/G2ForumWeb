@@ -42,17 +42,17 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String url = LOGIN_PAGE;
         try {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            String username = request.getParameter("txtUserName");
+            String password = request.getParameter("txtPassword");
             userDAO dao = new userDAO();
             userDTO acc = dao.checkLogin(username, password);
-            HttpSession session = request.getSession();
             if (acc != null) {
-                Cookie userNameCookie = new Cookie("USER_NAME", acc.getUsername());
-                Cookie passwordCookie = new Cookie("PASSWORD", acc.getPassword());
-                response.addCookie(userNameCookie);
-                response.addCookie(passwordCookie);
-                session.setAttribute("acc", acc);
+                HttpSession session = request.getSession();
+//                Cookie userNameCookie = new Cookie("USER_NAME", acc.getUsername());
+//                Cookie passwordCookie = new Cookie("PASSWORD", acc.getPassword());
+//                response.addCookie(userNameCookie);
+//                response.addCookie(passwordCookie);
+                session.setAttribute("ACC", acc);
                 if (acc.isIsMod()) {
                     url = MOD_PAGE;
                 } else {

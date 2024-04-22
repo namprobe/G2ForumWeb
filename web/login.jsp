@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +13,15 @@
         <title>Login Page</title>
     </head>
     <body>
-        <h1></h1>
+        <form action="MainController" method="post">
+            User Name<input type="text" name="txtUserName"/><br/>
+            Password<input type="password" name="txtPassword"/><br/>
+            <input type="submit" name="btAction" value="Login"/>
+            <input type="reset" value="Reset"/>
+        </form>
+        <c:set var="error" value="${requestScope.ERROR}"/>
+        <c:if test="${not empty error}">
+            <p><b>${error}</b></p>
+        </c:if>
     </body>
 </html>
