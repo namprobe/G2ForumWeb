@@ -36,6 +36,10 @@
         <servlet-name>SearchTopicServlet</servlet-name>
         <servlet-class>g2.servlets.SearchTopicServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <servlet-class>g2.servlets.CreatePostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CookieServlet</servlet-name>
         <url-pattern>/CookieServlet</url-pattern>
@@ -72,12 +76,16 @@
         <servlet-name>SearchTopicServlet</servlet-name>
         <url-pattern>/SearchTopicServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <url-pattern>/CreatePostServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>MainController</welcome-file>
+        <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

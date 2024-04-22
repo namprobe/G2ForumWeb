@@ -37,7 +37,7 @@
                 </ul>
                 <ul>
                     <div id="createPost">
-                        <!--Create post,vote -->
+                        <li><a href="MainController?btAction=Create_Post">Create Post</a></li>
                     </div>
                     <div class="search-container">
                         <form action="MainController" method="GET">

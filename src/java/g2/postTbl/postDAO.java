@@ -19,6 +19,28 @@ import java.util.List;
  */
 public class postDAO {
 
+    public postDTO insertPost(String user_id) throws SQLException, ClassNotFoundException, Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        postDTO insert_post = null;
+        try {
+            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return list_post;
+    }
+
     public List<postDTO> getPostByTopic(int topic_id) throws SQLException, ClassNotFoundException, Exception {
         Connection con = null;
         PreparedStatement stm = null;

@@ -7,16 +7,21 @@ package g2.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Nam
+ * @author APC
  */
-public class MainController extends HttpServlet {
+public class CreatePostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,16 +33,7 @@ public class MainController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private final String HOME_PAGE = "home.jsp";
-    private final String LOGIN_SERVLET = "LoginServlet";
-    private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
-    private final String SIGNUP_SERVLET = "SignupServlet";
-    private final String LOGOUT_SERVLET = "LogoutServlet";
-    private final String SEARCH_USER_SERVLET = "SearchUserServlet";
-    private final String SEARCH_TOPIC_SERVLET = "SearchTopicServlet";
-    private final String SEARCH_POST_SERVLET = "SearchPostcServlet";
-    private final String SEARCH_COMMENT_SERVLET = "SearchCommentServlet";
-    private final String CREATE_POST_SERVLET = "CreatePostServlet";
-    private final String CREATE_COMMENT_SERVLET = "CreateCommentServlet";
+    private final String CREATE_POST_PAGE = "createPost.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,35 +41,22 @@ public class MainController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String url = HOME_PAGE;
         try {
-            String action = request.getParameter("btAction");
-            if (action == null) {
-                url = SESSION_SERVLET;
-            } else if (action.equals("Login")) {
-                url = LOGIN_SERVLET;
-            } else if (action.equals("Signup")) {
-                url = SIGNUP_SERVLET;
-            } else if (action.equals("Logout")) {
-                url = LOGOUT_SERVLET;
-            } else if (action.equals("Search_User")) {
-                url = SEARCH_USER_SERVLET;
-            } else if (action.equals("Search_Topic")) {
-                url = SEARCH_TOPIC_SERVLET;
-            } else if (action.equals("Search_Post")) {
-                url = SEARCH_POST_SERVLET;
-            } else if (action.equals("Create_Post")) {
-                url = CREATE_POST_SERVLET;
-            } else if (action.equals("Search_Comment")) {
-                //url = SEARCH_COMMENT_SERVLET;
-            } else if (action.equals("Create_Comment")) {
-                //url = CREATE_COMMENT_SERVLET;
-            }
+            //String topic_id = request.getParameter("txtUserName");
+            String post_title = request.getParameter("txtPostTitle");
+            String post_content = request.getParameter("txtPostContent");
+            //LoginErrors errors = new LoginErrors();
+            String 
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
+
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             out.close();
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
