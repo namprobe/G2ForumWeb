@@ -8,6 +8,13 @@ and open the template in the editor.
     Author     : APC
 */
 
+/*
+
+background: #1F568B;
+color: white;
+*/
+
+
 body {
     font-family: sans-serif;
     color: #333;
@@ -20,6 +27,26 @@ body {
     color: white;
     font-size: 30px;
 }
+/*Flex Body*/
+#body {
+    padding: 10px;
+    background: #1F568B;
+    color: white;
+    
+    font-size: 15px;
+}
+
+#postTable {
+    flex: auto;
+    width: 800px;
+}
+
+#topicTable {
+    flex: none;
+    float: right;
+    width: 500px;
+}
+
 
 /*footer*/
 #footer {

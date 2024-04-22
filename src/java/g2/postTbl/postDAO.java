@@ -27,7 +27,7 @@ public class postDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String query = "SELECT * FROM postTbl Where topic_id = ?";
+                String query = "SELECT * FROM postTbl WHERE topic_id = ?";
                 stm = con.prepareCall(query);
                 stm.setInt(1, topic_id);
                 rs = stm.executeQuery();

@@ -5,7 +5,7 @@
  */
 package g2.servlets;
 
-import g2.voteTbl.VoteDAO;
+import g2.voteTbl.voteDAO;
 import g2.voteTbl.VoteSubmitError;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author admin
  */
 public class SubmitVoteServlet extends HttpServlet {
-    private final VoteDAO DAO = new VoteDAO();
+    private final voteDAO DAO = new voteDAO();
     private final String VIEW_POST = "ViewPostServlet";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

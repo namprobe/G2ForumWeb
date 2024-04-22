@@ -18,11 +18,11 @@ import java.util.List;
  * @author APC
  */
 public class voteDAO {
-    public List<VoteDTO> getVoteData() throws SQLException, ClassNotFoundException, Exception {
+    public List<voteDTO> getVoteData() throws SQLException, ClassNotFoundException, Exception {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        List<VoteDTO> list_vote = new ArrayList<>();
+        List<voteDTO> list_vote = new ArrayList<>();
         try {
             con = DBUtils.getConnection();
             if (con!=null) {
@@ -34,7 +34,7 @@ public class voteDAO {
                     int user_id = rs.getInt("user_id");
                     int post_id = rs.getInt("post_id");
                     int vote_type = rs.getInt("vote_type");
-                    list_vote.add(new VoteDTO(vote_id, user_id, post_id, vote_type));
+                    list_vote.add(new voteDTO(vote_id, user_id, post_id, vote_type));
                 }
             }
            

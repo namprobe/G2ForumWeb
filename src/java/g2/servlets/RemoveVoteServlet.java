@@ -5,7 +5,7 @@
  */
 package g2.servlets;
 
-import g2.voteTbl.VoteDAO;
+import g2.voteTbl.voteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -32,7 +32,7 @@ public class RemoveVoteServlet extends HttpServlet {
     private final String VIEW_POST = "ViewPostServlet";
     private final String ERROR_PAGE = "error.jsp";
     
-    private final VoteDAO DAO = new VoteDAO();
+    private final voteDAO DAO = new voteDAO();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
