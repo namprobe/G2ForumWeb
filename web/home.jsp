@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="myStyle.css">
         <script src="https://kit.fontawesome.com/aed3462b10.js" crossorigin="anonymous"></script>
         <title>Home Page</title>
@@ -56,6 +57,10 @@
             </div>
             <div id="topicTable">
                 <%
+                    //<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 
+                    //<c:if test="${not empty listLec}">
+                    //<c:forEach items="${requestScope.listLec}" var="lec">
+                    //${lec.course.courseName}
                     if (request.getParameter("txtSearchTopic") != null) {
                         List<topicDTO> list_topic = (List<topicDTO>) request.getAttribute("TOPICS");
                         if (list_topic != null && list_topic.size() > 0) {
@@ -82,8 +87,7 @@
                     }
                 } else {
                     topicDAO t_dao = new topicDAO();
-                    List<topicDTO> list_topic = null;
-//(List<topicDTO>) t_dao.getTopicData();
+                    List<topicDTO> list_topic = (List<topicDTO>) t_dao.getTopicData();
                     if (list_topic != null && list_topic.size() > 0) {
                 %>
                 <table border="1">
