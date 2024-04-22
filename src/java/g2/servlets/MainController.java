@@ -32,6 +32,7 @@ public class MainController extends HttpServlet {
     private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
     private final String SIGNUP_SERVLET = "SignupServlet";
     private final String LOGOUT_SERVLET = "LogoutServlet";
+    private final String SEARCH_USER_SERVLET = "SearchUserServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -48,6 +49,8 @@ public class MainController extends HttpServlet {
                 url = SIGNUP_SERVLET;
             } else if (action.equals("Logout")){
                 url = LOGOUT_SERVLET;
+            } else if (action.equals("Search User")) {
+                url = SEARCH_USER_SERVLET;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
