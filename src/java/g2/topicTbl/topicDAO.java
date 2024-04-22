@@ -5,7 +5,6 @@
  */
 package g2.topicTbl;
 
-import g2.postTbl.postDTO;
 import g2.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,7 +49,6 @@ public class topicDAO {
                 con.close();
             }
         }
-
         return list_topic;
     }
 }

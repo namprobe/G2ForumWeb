@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author APC
  */
-public class VoteDAO {
+public class voteDAO {
     public List<VoteDTO> getVoteData() throws SQLException, ClassNotFoundException, Exception {
         Connection con = null;
         PreparedStatement stm = null;
