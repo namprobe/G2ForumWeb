@@ -50,36 +50,34 @@
             </nav>
         </header>
         <div id="body">
-            <%
-                if (request.getParameter("txtSearchTopic") != null) {
-                    List<topicDTO> list_topic = (List<topicDTO>) request.getAttribute("TOPICS");
-                    if (list_topic != null && list_topic.size() > 0) {
-            %>
-            <table border="1">
-
-                <thead>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-
-
-            <%
-                    }
-                }
-            %>
-            <div>
+            <div id="postTable">
 
 
             </div>
-            <div>
+            <div id="topicTable">
+                <%
+                    if (request.getParameter("txtSearchTopic") != null) {
+                        List<topicDTO> list_topic = (List<topicDTO>) request.getAttribute("TOPICS");
+                        if (list_topic != null && list_topic.size() > 0) {
+                %>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
 
+
+                <%
+                        }
+                    }
+                %>
             </div>
         </div>
         <footer>
