@@ -11,12 +11,15 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Nam
  */
 public class userDAO {
+
     public userDTO checkLogin(String username, String password) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -25,22 +28,20 @@ public class userDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String query = " select * from userTbl where username=? and password=?";
+                String query = "select * from userTbl where username=? and password=?";
                 stm = con.prepareStatement(query);
                 stm.setString(1, username);
                 stm.setString(2, password);
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     int userID = rs.getInt("user_id");
-                    String userName = rs.getString("username");
-                    String passWord = rs.getString("password");
                     String email = rs.getString("email");
                     Date birthdate = rs.getDate("birthdate");
                     boolean isMod = rs.getBoolean("isMod");
                     boolean isDelete = rs.getBoolean("isDelete");
                     boolean isBanned = rs.getBoolean("isBanned");
                     byte[] avatar = rs.getBytes("avatar");
-                    acc = new userDTO(userID, userName, password, email, birthdate, isMod, isDelete, isBanned, avatar);
+                    acc = new userDTO(userID, username, password, email, birthdate, isMod, isDelete, isBanned, avatar);
                     // public userDTO(int user_id, String username, String password, String email, Date birthDate, boolean isMod, boolean isDelete,boolean isBanned, byte[] avatar) {
 
                 }
@@ -86,7 +87,8 @@ public class userDAO {
         }
         return false;//exception
     }
-     public boolean checkEmailExisted(String email) throws SQLException, ClassNotFoundException {
+
+    public boolean checkEmailExisted(String email) throws SQLException, ClassNotFoundException {
         Connection con = null;
         ResultSet rs = null;
         PreparedStatement stm = null;
@@ -97,7 +99,7 @@ public class userDAO {
                 stm = con.prepareStatement(query);
                 stm.setString(1, email);
                 rs = stm.executeQuery();
-                
+
                 return rs.next();
             }
         } finally {
@@ -113,7 +115,6 @@ public class userDAO {
         }
         return false;//exception
     }
-    
 
     public boolean signup(String username, String email, String password) throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -126,6 +127,99 @@ public class userDAO {
                 stm.setString(1, username);
                 stm.setString(2, email);
                 stm.setString(3, password);
+                int affectedRows = stm.executeUpdate();
+                return affectedRows == 1;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public List<userDTO> getUsers(String userName)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<userDTO> users = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String query = "SELECT * FROM userTbl WHERE username like ?";
+                stm = con.prepareStatement(query);
+                stm.setString(1, "%" + userName + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int userID = rs.getInt("user_id");
+                    String password = rs.getString("password");
+                    String email = rs.getString("email");
+                    Date birthdate = rs.getDate("birthdate");
+                    boolean isMod = rs.getBoolean("isMod");
+                    boolean isDelete = rs.getBoolean("isDelete");
+                    boolean isBanned = rs.getBoolean("isBanned");
+                    byte[] avatar = rs.getBytes("avatar");
+                    users.add(new userDTO(userID, userName, password, email, birthdate, isMod, isDelete, isBanned, avatar));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return users;
+    }
+
+    public boolean deleteUser(String userName) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String query = "DELETE FROM userTbl WHERE username = ?";
+                stm = con.prepareStatement(query);
+                stm.setString(1, userName);
+                int affectedRows = stm.executeUpdate();
+                return affectedRows == 1;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean updateUser(String userName, String password, String email, 
+            Date birthdate, boolean isMod, boolean isBanned, byte[] avatar) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String query = "UPDATE userTbl SET password = ?, email = ?,"
+                        + " birthdate = ?, isMod = ?, isBanned = ?, avatar = ? WHERE username = ?";
+                stm = con.prepareStatement(query);
+                stm.setString(1, password);
+                stm.setString(2, email);
+                stm.setDate(3, birthdate);
+                stm.setBoolean(4, isMod);
+                stm.setBoolean(5, isBanned);
+                stm.setBytes(6, avatar);
+                stm.setString(7, userName);
                 int affectedRows = stm.executeUpdate();
                 return affectedRows == 1;
             }

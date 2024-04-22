@@ -5,54 +5,58 @@
  */
 package g2.servlets;
 
+import g2.userTbl.userDAO;
+import g2.userTbl.userDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Nam
  */
-public class MainController extends HttpServlet {
+public class SearchUserServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private final String HOME_PAGE = "home.jsp";
-    private final String LOGIN_SERVLET = "LoginServlet";
-    private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
-    private final String SIGNUP_SERVLET = "SignupServlet";
-    private final String LOGOUT_SERVLET = "LogoutServlet";
-
+    private String USER_MANAGE_PAGE = "userManage.jsp";
+    private String USER_PAGE = "user.jsp";
+    private String LOGIN_PAGE = "login.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String url = HOME_PAGE;
+        String url = LOGIN_PAGE;
         try {
-            String action = request.getParameter("btAction");
-            if (action == null) {
-                url = SESSION_SERVLET;
-            } else if (action.equals("Login")) {
-                url = LOGIN_SERVLET;
-            } else if (action.equals("Signup")){
-                url = SIGNUP_SERVLET;
-            } else if (action.equals("Logout")){
-                url = LOGOUT_SERVLET;
+            HttpSession session = request.getSession(false); // lay session hien tai
+            if (session != null) {
+                String searchValue = request.getParameter("txtSearchUser");
+                userDAO dao = new userDAO();
+                List<userDTO> accs = dao.getUsers(searchValue);
+                request.setAttribute("ACCS", accs);
+                userDTO acc = (userDTO) session.getAttribute("ACC");
+                if (acc.isIsMod()) {
+                    url = USER_MANAGE_PAGE;
+                } else {
+                    url = USER_PAGE;
+                }
             }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
             out.close();
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
+    }
+    
+    private void searchUsersForModRole() {
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

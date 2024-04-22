@@ -21,6 +21,43 @@ body {
     font-size: 30px;
 }
 
+/*footer*/
+#footer {
+    padding: 60px;
+    text-align: center;
+    background: #1F568B;
+    color: white;
+    font-size: 30px;
+}
+#footer a {
+    /*text-decoration: none;*/
+    color: #fff;
+}
+#footer a:hover {
+    color: #333;
+}
+
+/*search bar*/
+
+#menu ul .search-container {
+    display: inline-block;
+}
+
+#menu ul .search-container form{
+    display: inline-block;
+    padding: 10px;
+}
+
+#menu ul .search-container input {
+    font-size: 17px;
+    border: none;
+}
+
+#menu ul .search-container button {
+    font-size: 15px;
+    float: right;
+}
+
 /*menu nav bar*/
 #menu ul {
     background: #1F568B;

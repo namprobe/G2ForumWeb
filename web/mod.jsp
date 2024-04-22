@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,11 +13,11 @@
         <title>Mod Page</title>
     </head>
     <body>
-        <form>
-            <input type="text" placeholder="Search user" name="txtSearchUser"/>
-            <input type="text" placeholder="Search topic" name="txtSearchTopic"/>
-            <input type="submit" name="btAction" value="Search"/>
+        <a href="userManage.jsp">User Management</a>
+        <form action="MainController" method="post">
+            <input type="submit" name="btAction" value="Logout"/>
         </form>
+        
         
     </body>
 </html>

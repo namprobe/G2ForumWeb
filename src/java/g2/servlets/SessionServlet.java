@@ -5,52 +5,44 @@
  */
 package g2.servlets;
 
+import g2.userTbl.userDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Nam
  */
-public class MainController extends HttpServlet {
+public class SessionServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     private final String HOME_PAGE = "home.jsp";
-    private final String LOGIN_SERVLET = "LoginServlet";
-    private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
-    private final String SIGNUP_SERVLET = "SignupServlet";
-    private final String LOGOUT_SERVLET = "LogoutServlet";
-
+    private final String MOD_PAGE = "mod.jsp";
+    private final String USER_PAGE = "user.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         String url = HOME_PAGE;
+        PrintWriter out = response.getWriter();
         try {
-            String action = request.getParameter("btAction");
-            if (action == null) {
-                url = SESSION_SERVLET;
-            } else if (action.equals("Login")) {
-                url = LOGIN_SERVLET;
-            } else if (action.equals("Signup")){
-                url = SIGNUP_SERVLET;
-            } else if (action.equals("Logout")){
-                url = LOGOUT_SERVLET;
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                userDTO acc = (userDTO) session.getAttribute("ACC");
+                if (acc.isIsMod()) {
+                    url = MOD_PAGE;
+                } else {
+                    url = USER_PAGE;
+                }
             }
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             out.close();
         }
     }
@@ -95,3 +87,4 @@ public class MainController extends HttpServlet {
     }// </editor-fold>
 
 }
+

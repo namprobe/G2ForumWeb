@@ -16,41 +16,16 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nam
  */
-public class MainController extends HttpServlet {
+public class UpdateUserServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private final String HOME_PAGE = "home.jsp";
-    private final String LOGIN_SERVLET = "LoginServlet";
-    private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
-    private final String SIGNUP_SERVLET = "SignupServlet";
-    private final String LOGOUT_SERVLET = "LogoutServlet";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String url = HOME_PAGE;
         try {
-            String action = request.getParameter("btAction");
-            if (action == null) {
-                url = SESSION_SERVLET;
-            } else if (action.equals("Login")) {
-                url = LOGIN_SERVLET;
-            } else if (action.equals("Signup")){
-                url = SIGNUP_SERVLET;
-            } else if (action.equals("Logout")){
-                url = LOGOUT_SERVLET;
-            }
+            
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
             out.close();
         }
     }
