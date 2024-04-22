@@ -7,6 +7,7 @@ package g2.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.sql.DriverManager;
  */
 public class DBUtils {
 
-    public static Connection getConnection() throws Exception {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Connection cn = null;
         String ip = "localhost";
         String port = "1433";
