@@ -5,8 +5,14 @@
  */
 package g2.servlets;
 
+import g2.topicTbl.topicDAO;
+import g2.topicTbl.topicDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Nam
+ * @author APC
  */
-public class MainController extends HttpServlet {
+public class SearchTopicServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,35 +34,25 @@ public class MainController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private final String HOME_PAGE = "home.jsp";
-    private final String LOGIN_SERVLET = "LoginServlet";
-    private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
-    private final String SIGNUP_SERVLET = "SignupServlet";
-    private final String LOGOUT_SERVLET = "LogoutServlet";
-    private final String SEARCH_USER_SERVLET = "SearchUserServlet";
-    private final String SEARCH_TOPIC_SERVLET = "SearchTopicServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String url = HOME_PAGE;
+        String url = null;
         try {
-            String action = request.getParameter("btAction");
-            if (action == null) {
-                url = SESSION_SERVLET;
-            } else if (action.equals("Login")) {
-                url = LOGIN_SERVLET;
-            } else if (action.equals("Signup")) {
-                url = SIGNUP_SERVLET;
-            } else if (action.equals("Logout")) {
-                url = LOGOUT_SERVLET;
-            } else if (action.equals("Search_User")) {
-                url = SEARCH_USER_SERVLET;
-            } else if (action.equals("Search_Topic")) {
-                url = SEARCH_TOPIC_SERVLET;
-            }
+            String searchValue = request.getParameter("txtSearchTopic");
+            topicDAO t_dao = new topicDAO();
+            List<topicDTO> list_topic = t_dao.getTopicByName(searchValue);
+            request.setAttribute("TOPICS", list_topic);
+            url = HOME_PAGE;
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
             out.close();
         }
     }

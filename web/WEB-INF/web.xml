@@ -32,6 +32,10 @@
         <servlet-name>SessionServlet</servlet-name>
         <servlet-class>g2.servlets.SessionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchTopicServlet</servlet-name>
+        <servlet-class>g2.servlets.SearchTopicServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CookieServlet</servlet-name>
         <url-pattern>/CookieServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/SessionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchTopicServlet</servlet-name>
+        <url-pattern>/SearchTopicServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
