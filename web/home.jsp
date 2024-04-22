@@ -39,12 +39,12 @@
                         <form action="MainController" method="GET">
                             <input type="text" placeholder="user"
                                    name="txtSearchUser"/>
-                            <button type="SearchUser"><i class="fa fa-search"></i></button>
+                            <button type="submit" name="btAction" value="Search_User"><i class="fa fa-search"></i></button>
                         </form>
                         <form action="MainController" method="GET">
                             <input type="text" placeholder="topic" 
                                    name="txtSearchTopic"/>
-                            <button type="SearchTopic"><i class="fa fa-search"></i></button>
+                            <button type="submit" name="btAction" value="Search_Topic"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                 </ul>

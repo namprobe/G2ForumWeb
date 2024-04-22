@@ -49,7 +49,7 @@ public class MainController extends HttpServlet {
                 url = SIGNUP_SERVLET;
             } else if (action.equals("Logout")){
                 url = LOGOUT_SERVLET;
-            } else if (action.equals("Search User")) {
+            } else if (action.equals("Search_User")) {
                 url = SEARCH_USER_SERVLET;
             }
         } finally {
