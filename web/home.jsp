@@ -61,7 +61,7 @@
                     //<c:if test="${not empty listLec}">
                     //<c:forEach items="${requestScope.listLec}" var="lec">
                     //${lec.course.courseName}
-                    if (request.getParameter("txtSearchPostTopic") != null) {
+                    if (request.getParameter("txtSearchPostTopic")!= null) {
                         List<postDTO> list_post = (List<postDTO>) request.getAttribute("POSTS");
                         if (list_post != null && list_post.size() > 0) {
                 %>

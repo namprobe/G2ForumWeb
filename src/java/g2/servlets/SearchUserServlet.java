@@ -49,9 +49,9 @@ public class SearchUserServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            out.close();
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+            out.close();
         }
     }
     

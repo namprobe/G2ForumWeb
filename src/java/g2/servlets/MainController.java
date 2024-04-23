@@ -32,13 +32,16 @@ public class MainController extends HttpServlet {
     private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
     private final String SIGNUP_SERVLET = "SignupServlet";
     private final String LOGOUT_SERVLET = "LogoutServlet";
-    private final String SEARCH_USER_SERVLET = "SearchUserServlet";
     private final String SEARCH_TOPIC_SERVLET = "SearchTopicServlet";
     private final String SEARCH_POST_SERVLET = "SearchPostcServlet";
     private final String VIEW_COMMENT_SERVLET = "ViewCommentServlet";
     private final String CREATE_POST_SERVLET = "CreatePostServlet";
     private final String CREATE_COMMENT_SERVLET = "CreateCommentServlet";
     private final String VIEW_POST_SERVLET = "ViewPostServlet";
+    private final String SEARCH_USER_SERVLET = "SearchUserServlet";
+    private final String DELETE_USER_SERVLET = "DeleteUserServlet";
+    private final String UPDATE_USER_SERVLET = "UpdateUserServlet";
+    private final String BAN_USER_SERVLET = "BanUserServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,8 +58,6 @@ public class MainController extends HttpServlet {
                 url = SIGNUP_SERVLET;
             } else if (action.equals("Logout")) {
                 url = LOGOUT_SERVLET;
-            } else if (action.equals("Search_User")) {
-                url = SEARCH_USER_SERVLET;
             } else if (action.equals("Search_Topic")) {
                 url = SEARCH_TOPIC_SERVLET;
             } else if (action.equals("Search_Post")) {
@@ -69,6 +70,14 @@ public class MainController extends HttpServlet {
                 url = VIEW_COMMENT_SERVLET;
             } else if (action.equals("Create_Comment")) {
                 //url = CREATE_COMMENT_SERVLET;
+            } else if (action.equals("Search User")) {
+                url = SEARCH_USER_SERVLET;
+            } else if (action.equals("Delete")) {
+                url = DELETE_USER_SERVLET;
+            } else if (action.equals("Modify")) {
+                url = BAN_USER_SERVLET;
+            } else if (action.equals("Update")) {
+                url = UPDATE_USER_SERVLET;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
