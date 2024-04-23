@@ -46,29 +46,26 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("txtPassword");
             userDAO dao = new userDAO();
             userDTO acc = dao.checkLogin(username, password);
-            if (acc != null) {
-                HttpSession session = request.getSession();
-//                Cookie userNameCookie = new Cookie("USER_NAME", acc.getUsername());
-//                Cookie passwordCookie = new Cookie("PASSWORD", acc.getPassword());
-//                response.addCookie(userNameCookie);
-//                response.addCookie(passwordCookie);
-                session.setAttribute("ACC", acc);
-                if (acc.isIsMod()) {
-                    url = MOD_PAGE;
-                } else {
-                    url = USER_PAGE;
-                }
-//                request.setAttribute("ACC", acc);
-            } //4.login sai chuyen sang trang invalid
-            else {
+            if (acc == null) {
                 request.setAttribute("ERROR", "Incorrect username or password");
-                url = LOGIN_PAGE;
+            } else {
+                if (!acc.isIsBanned()) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("ACC", acc);
+                    if (acc.isIsMod()) {//kiem tra neu la mod thi dang nhap vao trang mod
+                        url = MOD_PAGE;
+                    } else {
+                        url = USER_PAGE;
+                    }
+
+                } else {
+                    request.setAttribute("ERROR", "Your account has been banned.");
+                }
             }
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-            //1.Nho dong file sau khi su dung
             out.close();
         }
 
@@ -114,4 +111,3 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
