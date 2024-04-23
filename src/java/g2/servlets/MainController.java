@@ -39,6 +39,10 @@ public class MainController extends HttpServlet {
     private final String CREATE_POST_SERVLET = "CreatePostServlet";
     private final String CREATE_COMMENT_SERVLET = "CreateCommentServlet";
     private final String VIEW_POST_SERVLET = "ViewPostServlet";
+    private final String SEARCH_USER_SERVLET = "SearchUserServlet";
+    private final String DELETE_USER_SERVLET = "DeleteUserServlet";
+    private final String UPDATE_USER_SERVLET = "UpdateUserServlet";
+    private final String BAN_USER_SERVLET = "BanUserServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -69,6 +73,14 @@ public class MainController extends HttpServlet {
                 url = VIEW_COMMENT_SERVLET;
             } else if (action.equals("Create_Comment")) {
                 //url = CREATE_COMMENT_SERVLET;
+            } else if (action.equals("Search User")) {
+                url = SEARCH_USER_SERVLET;
+            } else if (action.equals("Delete")) {
+                url = DELETE_USER_SERVLET;
+            } else if (action.equals("Modify")) {
+                url = BAN_USER_SERVLET;
+            } else if (action.equals("Update")) {
+                url = UPDATE_USER_SERVLET;
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
