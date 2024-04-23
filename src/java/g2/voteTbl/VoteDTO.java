@@ -17,7 +17,8 @@ public class voteDTO {
 
     public voteDTO() {
     }
-
+//constructor -- mod_id -null
+    
     public voteDTO(int vote_id, int user_id, int post_id, int vote_type) {
         this.vote_id = vote_id;
         this.user_id = user_id;

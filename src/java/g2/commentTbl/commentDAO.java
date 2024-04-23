@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class commentDAO {
 
-    public List<commentDTO> getCommentByPost(int post_id) throws SQLException, ClassNotFoundException, Exception {
+    public List<commentDTO> getCommentByPost(int view_post_id) throws SQLException, ClassNotFoundException, Exception {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -28,16 +28,16 @@ public class commentDAO {
             if (con != null) {
                 String query = "SELECT * FROM commentTbl WHERE post_id = ?";
                 stm = con.prepareStatement(query);
-                stm.setInt(1, post_id);
+                stm.setInt(1, view_post_id);
                 rs = stm.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     int comment_id = rs.getInt("comment_id");
                     int user_id = rs.getInt("user_id");
                     //post_id
                     String content = rs.getString("content");
                     String image = rs.getString("image");
                     int parent_id = rs.getInt("parent_id");
-                    list_comment.add(new commentDTO(comment_id, user_id, post_id, content, image, parent_id));
+                    list_comment.add(new commentDTO(comment_id, user_id, view_post_id, content, image, parent_id));
                 }
             }
 

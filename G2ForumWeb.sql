@@ -1,3 +1,4 @@
+
 CREATE DATABASE G2ForumWeb;
 
 USE G2ForumWeb;
@@ -59,6 +60,7 @@ INSERT INTO postTbl VALUES
 ('1','1','New Users','Anyone are free to vote','0','0',null),
 ('1','1','Account creation','Anyone are free to vote','0','0',null);
 
+DROP TABLE voteTbl;
 CREATE TABLE voteTbl (
 	vote_id int IDENTITY(1,1) PRIMARY KEY,
 	user_id int FOREIGN KEY REFERENCES userTbl(user_id) NOT NULL,
@@ -67,7 +69,7 @@ CREATE TABLE voteTbl (
 );
 
 INSERT INTO voteTbl VALUES
-('1','1','1'),
+('1','2','1'),
 ('2','1','1'),
 ('3','1','1'),
 ('4','1','-1'),
