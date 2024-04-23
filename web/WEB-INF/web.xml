@@ -40,6 +40,10 @@
         <servlet-name>CreatePostServlet</servlet-name>
         <servlet-class>g2.servlets.CreatePostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewPostServlet</servlet-name>
+        <servlet-class>g2.servlets.ViewPostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CookieServlet</servlet-name>
         <url-pattern>/CookieServlet</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>CreatePostServlet</servlet-name>
         <url-pattern>/CreatePostServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPostServlet</servlet-name>
+        <url-pattern>/ViewPostServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

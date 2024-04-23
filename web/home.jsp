@@ -107,7 +107,7 @@
                             for (postDTO p : list_post) {
                         %>
                         <tr>
-                            <td><%= p.getTitle()%></td>
+                            <td><a href=<%="MainController?btnAction=View_Post&txtViewPostId=" + p.getPost_id()%> ><%= p.getTitle()%></a></td>
                             <td><%= p.getContent()%></td>
                         </tr>
                         <%

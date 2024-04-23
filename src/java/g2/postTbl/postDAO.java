@@ -48,6 +48,45 @@ public class postDAO {
         return insert_post;
     }
 
+    public postDTO getPostById(int view_post_id) throws SQLException, ClassNotFoundException, Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        postDTO view_post = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String query = "SELECT * FROM postTbl WHERE post_id = ?";
+                stm = con.prepareCall(query);
+                stm.setInt(1, view_post_id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    //int post_id = rs.getInt("post_id");
+                    int user_id = rs.getInt("user_id");
+                    int topic_id = rs.getInt("topic_id");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    boolean isHidden = rs.getBoolean("isHidden");
+                    boolean isDelete = rs.getBoolean("isDelete");
+                    String image = rs.getString("image");
+                    view_post = new postDTO(view_post_id, user_id, topic_id, title, content, isHidden, isDelete, image);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return view_post;
+    }
+
     public List<postDTO> getPostByTopic(int topic_id) throws SQLException, ClassNotFoundException, Exception {
         Connection con = null;
         PreparedStatement stm = null;
