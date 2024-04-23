@@ -23,5 +23,9 @@
         <c:if test="${not empty error}">
             <p><b>${error}</b></p>
         </c:if>
+        <c:set var="msg" value="${requestScope.MSG}"/>
+        <c:if test="${not empty msg}">
+            <p><b>${msg}</b></p>
+        </c:if>
     </body>
 </html>
