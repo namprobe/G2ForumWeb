@@ -27,6 +27,7 @@ public class SearchUserServlet extends HttpServlet {
     private String USER_MANAGE_PAGE = "userManage.jsp";
     private String USER_PAGE = "user.jsp";
     private String LOGIN_PAGE = "login.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,13 +36,15 @@ public class SearchUserServlet extends HttpServlet {
         try {
             HttpSession session = request.getSession(false); // lay session hien tai
             if (session != null) {
-                String searchValue = request.getParameter("txtSearchUser");
                 userDAO dao = new userDAO();
+                String searchValue = request.getParameter("txtSearchUser");
                 List<userDTO> accs = dao.getUsers(searchValue);
                 request.setAttribute("ACCS", accs);
                 userDTO acc = (userDTO) session.getAttribute("ACC");
                 if (acc.isIsMod()) {
                     url = USER_MANAGE_PAGE;
+                    List<userDTO> mods = dao.getMods(true);
+                    request.setAttribute("MODS", mods);
                 } else {
                     url = USER_PAGE;
                 }
@@ -49,14 +52,14 @@ public class SearchUserServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } finally {
-            out.close();
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+            out.close();
         }
     }
-    
+
     private void searchUsersForModRole() {
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
