@@ -32,7 +32,6 @@ public class MainController extends HttpServlet {
     private final String SESSION_SERVLET = "SessionServlet"; // check cookie truoc login
     private final String SIGNUP_SERVLET = "SignupServlet";
     private final String LOGOUT_SERVLET = "LogoutServlet";
-    private final String SEARCH_USER_SERVLET = "SearchUserServlet";
     private final String SEARCH_TOPIC_SERVLET = "SearchTopicServlet";
     private final String SEARCH_POST_SERVLET = "SearchPostcServlet";
     private final String VIEW_COMMENT_SERVLET = "ViewCommentServlet";
@@ -59,8 +58,6 @@ public class MainController extends HttpServlet {
                 url = SIGNUP_SERVLET;
             } else if (action.equals("Logout")) {
                 url = LOGOUT_SERVLET;
-            } else if (action.equals("Search_User")) {
-                url = SEARCH_USER_SERVLET;
             } else if (action.equals("Search_Topic")) {
                 url = SEARCH_TOPIC_SERVLET;
             } else if (action.equals("Search_Post")) {
