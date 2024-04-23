@@ -13,11 +13,10 @@
         <title>Mod Page</title>
     </head>
     <body>
-        <a href="userManage.jsp">User Management</a>
+        <a href="ViewProfile">Your Profile</a>
         <form action="MainController" method="post">
             <input type="submit" name="btAction" value="Logout"/>
         </form>
-        
-        
+        <a href="SearchUserServlet">User Management</a>
     </body>
 </html>
