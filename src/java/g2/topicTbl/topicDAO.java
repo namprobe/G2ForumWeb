@@ -32,7 +32,7 @@ public class topicDAO {
                 stm = con.prepareStatement(query);
                 stm.setString(1, searchTopicValue + "%");
                 rs = stm.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     int topic_id = rs.getInt("topic_id");
                     String title = rs.getString("title");
                     String content = rs.getString("content");
@@ -64,14 +64,13 @@ public class topicDAO {
                 String query = "SELECT * FROM topicTbl";
                 stm = con.prepareStatement(query);
                 rs = stm.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     int topic_id = rs.getInt("topic_id");
                     String title = rs.getString("title");
                     String content = rs.getString("content");
                     list_topic.add(new topicDTO(topic_id, title, content));
                 }
             }
-
         } finally {
             if (rs != null) {
                 rs.close();

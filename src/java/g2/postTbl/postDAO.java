@@ -60,7 +60,7 @@ public class postDAO {
                 stm = con.prepareCall(query);
                 stm.setInt(1, topic_id);
                 rs = stm.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     int post_id = rs.getInt("post_id");
                     int user_id = rs.getInt("user_id");
                     //topic_id
@@ -98,7 +98,7 @@ public class postDAO {
                 String query = "SELECT * FROM postTbl";
                 stm = con.prepareStatement(query);
                 rs = stm.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     int post_id = rs.getInt("post_id");
                     int user_id = rs.getInt("user_id");
                     int topic_id = rs.getInt("topic_id");
