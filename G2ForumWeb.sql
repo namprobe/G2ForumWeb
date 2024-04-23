@@ -51,16 +51,16 @@ CREATE TABLE postTbl (
 	content text,
 	isHidden bit,
 	isDelete bit,
-	image varbinary(max)
+	image varbinary(max),
+	voteSum int,
 );
 
 INSERT INTO postTbl VALUES
-('1','1','Admin content','Anyone are free to vote','0','0',null),
-('1','1','User content','Anyone are free to vote','0','0',null),
-('1','1','New Users','Anyone are free to vote','0','0',null),
-('1','1','Account creation','Anyone are free to vote','0','0',null);
+('1','1','Admin content','Anyone are free to vote','0','0',null,0),
+('1','1','User content','Anyone are free to vote','0','0',null,0),
+('1','1','New Users','Anyone are free to vote','0','0',null,0),
+('1','1','Account creation','Anyone are free to vote','0','0',null,0);
 
-DROP TABLE voteTbl;
 CREATE TABLE voteTbl (
 	vote_id int IDENTITY(1,1) PRIMARY KEY,
 	user_id int FOREIGN KEY REFERENCES userTbl(user_id) NOT NULL,
