@@ -28,16 +28,18 @@ public class LogoutServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String HOME_PAGE= "home.jsp";
+    private final String LOGIN_PAGE= "login.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String url = HOME_PAGE;
+        String url = LOGIN_PAGE;
         try {
             HttpSession session = request.getSession(false);
             if (session != null) {
-               session.invalidate(); 
+               String msg = (String) request.getAttribute("MSG");
+               request.setAttribute("MSG", msg);
+               session.invalidate();
             }   
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
