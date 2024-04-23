@@ -167,4 +167,44 @@ public class postDAO {
         }
         return list_post;
     }
+
+    public List<postDTO> getPostData(int userID) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<postDTO> list_post = new ArrayList<>();
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String query = "SELECT * FROM postTbl WHERE user_id = ?";
+                stm = con.prepareStatement(query);
+                stm.setInt(1, userID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int post_id = rs.getInt("post_id");
+                    int user_id = rs.getInt("user_id");
+                    int topic_id = rs.getInt("topic_id");
+                    String title = rs.getString("title");
+                    String content = rs.getString("content");
+                    boolean isHidden = rs.getBoolean("isHidden");
+                    boolean isDelete = rs.getBoolean("isDelete");
+                    String image = rs.getString("image");
+                    int voteSum = rs.getInt("voteSum");
+                    list_post.add(new postDTO(post_id, user_id, topic_id, title, content, isHidden, isDelete, image, voteSum));
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list_post;
+    }
 }
