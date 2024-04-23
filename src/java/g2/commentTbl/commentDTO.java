@@ -19,6 +19,16 @@ public class commentDTO {
 
     public commentDTO() {
     }
+    
+    //Contructor -- comment_id;
+    //unuse
+    public commentDTO(int user_id, int post_id, String content, String image, int parent_id) {
+        this.user_id = user_id;
+        this.post_id = post_id;
+        this.content = content;
+        this.image = image;
+        this.parent_id = parent_id;
+    }
 
     public commentDTO(int comment_id, int user_id, int post_id, String content, String image, int parent_id) {
         this.comment_id = comment_id;

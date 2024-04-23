@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class voteDAO {
     public List<voteDTO> getVoteData() throws SQLException, ClassNotFoundException, Exception {
+        //getVoteData with mod_id
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -34,7 +35,8 @@ public class voteDAO {
                     int user_id = rs.getInt("user_id");
                     int post_id = rs.getInt("post_id");
                     int vote_type = rs.getInt("vote_type");
-                    list_vote.add(new voteDTO(vote_id, user_id, post_id, vote_type));
+                    int mod_id = rs.getInt("mod_id");
+                    list_vote.add(new voteDTO(vote_id, user_id, post_id, vote_type, mod_id));
                 }
             }
            
@@ -54,12 +56,11 @@ public class voteDAO {
             con = DBUtils.getConnection();
             if (con!=null) {
                 String query = "INSERT INTO voteTbl (user_id,topic_id,vote_type) "
-                        + "VALUES (?,?,?)";
+                        + "VALUES (?,?,?,?)";
                 stm = con.prepareStatement(query);
                 stm.setInt(1, user_id);
                 stm.setInt(2, topic_id);
                 stm.setInt(3, vote_type);
-                
                 if (stm.executeUpdate()>0){
                     result = true;
                 }              

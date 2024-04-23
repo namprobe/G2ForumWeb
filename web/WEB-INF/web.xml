@@ -44,6 +44,10 @@
         <servlet-name>ViewPostServlet</servlet-name>
         <servlet-class>g2.servlets.ViewPostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCommentServlet</servlet-name>
+        <servlet-class>g2.servlets.ViewCommentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CookieServlet</servlet-name>
         <url-pattern>/CookieServlet</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>ViewPostServlet</servlet-name>
         <url-pattern>/ViewPostServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCommentServlet</servlet-name>
+        <url-pattern>/ViewCommentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

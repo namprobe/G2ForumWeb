@@ -4,6 +4,7 @@
     Author     : APC
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="g2.postTbl.postDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -36,6 +37,12 @@
         <%
             }
         %>
+        
+        <%
+            List<commentDTO> list_comment = (List<commentDTO)) request.getAttribute("LISTCOMMENT");
+            
+        %>
+        
         <h1></h1>
     </body>
 </html>

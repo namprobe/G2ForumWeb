@@ -26,7 +26,7 @@ public class postDAO {
         try {
             con = DBUtils.getConnection();
             if (con != null) {
-                String query = "INSERT INTO postTbl(user_id,topic_id,title,content,isHidden,isDelete,image) VALUES (?,?,?,?,'0','0',null)";
+                String query = "INSERT INTO postTbl(user_id,topic_id,title,content,isHidden,isDelete,image,voteSum) VALUES (?,?,?,?,'0','0',null,'0')";
                 stm = con.prepareStatement(query);
                 stm.setInt(1, author_id);
                 stm.setInt(2, topic_id);
@@ -34,7 +34,8 @@ public class postDAO {
                 stm.setString(4, post_content);
                 stm.executeUpdate();
                 //image
-                insert_post = new postDTO(author_id, topic_id, post_title, post_content, false, false, null);
+                insert_post = new postDTO(author_id, topic_id, post_title, post_content, false, false, null, 0);
+                //voteSum
                 // sql check ok -- testing createPost.jsp
             }
         } finally {
@@ -69,7 +70,8 @@ public class postDAO {
                     boolean isHidden = rs.getBoolean("isHidden");
                     boolean isDelete = rs.getBoolean("isDelete");
                     String image = rs.getString("image");
-                    view_post = new postDTO(view_post_id, user_id, topic_id, title, content, isHidden, isDelete, image);
+                    int voteSum = rs.getInt("voteSum");
+                    view_post = new postDTO(view_post_id, user_id, topic_id, title, content, isHidden, isDelete, image, voteSum);
                 }
             }
         } finally {
@@ -108,7 +110,8 @@ public class postDAO {
                     boolean isHidden = rs.getBoolean("isHidden");
                     boolean isDelete = rs.getBoolean("isDelete");
                     String image = rs.getString("image");
-                    list_post.add(new postDTO(post_id, user_id, topic_id, title, content, isHidden, isDelete, image));
+                    int voteSum = rs.getInt("voteSum");
+                    list_post.add(new postDTO(post_id, user_id, topic_id, title, content, isHidden, isDelete, image, voteSum));
                 }
             }
         } finally {
@@ -146,7 +149,8 @@ public class postDAO {
                     boolean isHidden = rs.getBoolean("isHidden");
                     boolean isDelete = rs.getBoolean("isDelete");
                     String image = rs.getString("image");
-                    list_post.add(new postDTO(post_id, user_id, topic_id, title, content, isHidden, isDelete, image));
+                    int voteSum = rs.getInt("voteSum");
+                    list_post.add(new postDTO(post_id, user_id, topic_id, title, content, isHidden, isDelete, image, voteSum));
                 }
             }
 

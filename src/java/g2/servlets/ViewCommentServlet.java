@@ -5,10 +5,11 @@
  */
 package g2.servlets;
 
-import g2.postTbl.postDAO;
-import g2.postTbl.postDTO;
+import g2.commentTbl.commentDAO;
+import g2.commentTbl.commentDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author APC
  */
-public class ViewPostServlet extends HttpServlet {
+public class ViewCommentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +39,15 @@ public class ViewPostServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String url = HOME_PAGE;
-        postDTO view_post = null;
         try {
             int view_post_id = Integer.parseInt(request.getParameter("txtViewPostId"));
-            postDAO p_dao = new postDAO();
-            view_post = p_dao.getPostById(view_post_id);
-            if (view_post != null) {
-                request.setAttribute("VIEWPOST", view_post);
+            commentDAO c_dao = new commentDAO();
+            List<commentDTO> list_comment = c_dao.getCommentByPost(view_post_id);
+            if (list_comment != null) {
+                request.setAttribute("LISTCOMMENT", list_comment);
                 url = VIEW_POST_PAGE;
             }
+            
 
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();

@@ -35,7 +35,7 @@ public class MainController extends HttpServlet {
     private final String SEARCH_USER_SERVLET = "SearchUserServlet";
     private final String SEARCH_TOPIC_SERVLET = "SearchTopicServlet";
     private final String SEARCH_POST_SERVLET = "SearchPostcServlet";
-    private final String SEARCH_COMMENT_SERVLET = "SearchCommentServlet";
+    private final String VIEW_COMMENT_SERVLET = "ViewCommentServlet";
     private final String CREATE_POST_SERVLET = "CreatePostServlet";
     private final String CREATE_COMMENT_SERVLET = "CreateCommentServlet";
     private final String VIEW_POST_SERVLET = "ViewPostServlet";
@@ -65,8 +65,8 @@ public class MainController extends HttpServlet {
                 url = CREATE_POST_SERVLET;
             } else if (action.equals("View_Post")) {
                 url = VIEW_POST_SERVLET;
-            } else if (action.equals("Search_Comment")) {
-                //url = SEARCH_COMMENT_SERVLET;
+            } else if (action.equals("View_Comment")) {
+                url = VIEW_COMMENT_SERVLET;
             } else if (action.equals("Create_Comment")) {
                 //url = CREATE_COMMENT_SERVLET;
             }

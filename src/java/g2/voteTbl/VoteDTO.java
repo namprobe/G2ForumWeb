@@ -14,16 +14,37 @@ public class voteDTO {
     private int user_id;
     private int post_id;
     private int vote_type;
+    private int mod_id;
 
     public voteDTO() {
     }
+//constructor -- mod_id -null
 
+    
+    public voteDTO(int vote_id, int user_id, int post_id, int vote_type, int mod_id) {
+        this.vote_id = vote_id;
+        this.user_id = user_id;
+        this.post_id = post_id;
+        this.vote_type = vote_type;
+        this.mod_id = mod_id;
+    }
+    
     public voteDTO(int vote_id, int user_id, int post_id, int vote_type) {
         this.vote_id = vote_id;
         this.user_id = user_id;
         this.post_id = post_id;
         this.vote_type = vote_type;
     }
+
+    public int getMod_id() {
+        return mod_id;
+    }
+
+    public void setMod_id(int mod_id) {
+        this.mod_id = mod_id;
+    }
+    
+    
 
     public int getVote_id() {
         return vote_id;
