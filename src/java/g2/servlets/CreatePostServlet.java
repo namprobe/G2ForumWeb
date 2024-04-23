@@ -55,13 +55,15 @@ public class CreatePostServlet extends HttpServlet {
             //LoginErrors errors = new LoginErrors();
             //constructor =-- post_id
             //postDTO insert_post = new postDTO(author_id, topic_id, post_title, post_content, false, false, 'null';
-            String image = null;
+            //String image = ;
             postDAO p_dao = new postDAO();
-            postDTO insert_post = p_dao.insertPost(author_id, topic_id, post_title, post_content, image);
-            request.setAttribute("INSERT_POST", insert_post);
-            url = HOME_PAGE;
+            postDTO insert_post = p_dao.insertPost(author_id, topic_id, post_title, post_content, null);
+            if(insert_post!=null) {
+                request.setAttribute("INSERT_POST", insert_post);
+                url = HOME_PAGE;
+            }
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (Exception ex) {
             Logger.getLogger(CreatePostServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

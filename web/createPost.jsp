@@ -12,7 +12,7 @@
         <title>Create Post Page</title>
     </head>
     <body>
-        <form>
+        <form action="MainController" method="GET">
             <h1>Posting on topic: </h1>
             Post title: <input type="text" name="txtPostTitle"/></br>
             Post content: <input type="text" name="txtPostContent"/></br>
