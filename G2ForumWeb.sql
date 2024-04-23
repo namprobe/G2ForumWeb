@@ -60,33 +60,33 @@ INSERT INTO postTbl VALUES
 ('1','1','New Users','Anyone are free to vote','0','0',null),
 ('1','1','Account creation','Anyone are free to vote','0','0',null);
 
+DROP TABLE voteTbl;
 CREATE TABLE voteTbl (
 	vote_id int IDENTITY(1,1) PRIMARY KEY,
 	user_id int FOREIGN KEY REFERENCES userTbl(user_id) NOT NULL,
 	post_id int FOREIGN KEY REFERENCES postTbl(post_id),
-	mod_id int FOREIGN KEY REFERENCES userTbl(user_id),
 	vote_type numeric(2,0) NOT NULL,
 );
 
 INSERT INTO voteTbl VALUES
-('1','2','1',null),
-('2','1','1',null),
-('3','1','1',null),
-('4','1','-1',null),
-('5','1','-1',null),
-('6','1','-1',null),
-('1','2','1',null),
-('2','2','1',null),
-('3','2','-1',null),
-('4','2','-1',null),
-('5','2','-1',null),
-('6','2','-1',null),
-('1','3','1',null),
-('2','3','-1',null),
-('3','3','-1',null),
-('4','3','-1',null),
-('5','3','-1',null),
-('6','3','-1',null);
+('1','2','1'),
+('2','1','1'),
+('3','1','1'),
+('4','1','-1'),
+('5','1','-1'),
+('6','1','-1'),
+('1','2','1'),
+('2','2','1'),
+('3','2','-1'),
+('4','2','-1'),
+('5','2','-1'),
+('6','2','-1'),
+('1','3','1'),
+('2','3','-1'),
+('3','3','-1'),
+('4','3','-1'),
+('5','3','-1'),
+('6','3','-1');
 
 CREATE TABLE commentTbl (
 	comment_id int IDENTITY(1,1) PRIMARY KEY,
