@@ -21,6 +21,16 @@ public class postDTO {
 
     public postDTO() {
     }
+//constructor =-- post_id
+    public postDTO(int user_id, int topic_id, String title, String content, boolean isHidden, boolean isDelete, String image) {
+        this.user_id = user_id;
+        this.topic_id = topic_id;
+        this.title = title;
+        this.content = content;
+        this.isHidden = isHidden;
+        this.isDelete = isDelete;
+        this.image = image;
+    }
 
     public postDTO(int post_id, int user_id, int topic_id, String title, String content, boolean isHidden, boolean isDelete, String image) {
         this.post_id = post_id;

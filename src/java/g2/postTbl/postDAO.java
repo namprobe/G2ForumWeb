@@ -19,17 +19,25 @@ import java.util.List;
  */
 public class postDAO {
 
-    public postDTO insertPost(String user_id) throws SQLException, ClassNotFoundException, Exception {
+    public postDTO insertPost(int author_id, int topic_id, String post_title, String post_content, String image) throws SQLException, ClassNotFoundException, Exception {
         Connection con = null;
         PreparedStatement stm = null;
-        ResultSet rs = null;
         postDTO insert_post = null;
         try {
-            
-        } finally {
-            if (rs != null) {
-                rs.close();
+            con = DBUtils.getConnection();
+            if (con != null) {
+                String query = "INSERT INTO postTbl(user_id,topic_id,post_title,post_content,isHidden,isDelete,image) VALUES"
+                        + "(?,?,?,?,'0','0',null)";
+                stm = con.prepareStatement(query);
+                stm.setInt(1, author_id);
+                stm.setInt(2, topic_id);
+                stm.setString(3, post_title);
+                stm.setString(4, post_content);
+                stm.executeUpdate();
+                //image
+                insert_post = new postDTO(author_id, topic_id, post_title, post_content, false, false, "");
             }
+        } finally {
             if (stm != null) {
                 stm.close();
             }
@@ -37,8 +45,7 @@ public class postDAO {
                 con.close();
             }
         }
-
-        return list_post;
+        return insert_post;
     }
 
     public List<postDTO> getPostByTopic(int topic_id) throws SQLException, ClassNotFoundException, Exception {
