@@ -19,19 +19,20 @@
             <input type="text" name="txtSearchUser" placeholder="Search user" value="${param.txtSearchUser}"/>
             <input type="submit" name="btAction" value="Search User"/>
         </form>
-    <c:set var="accs" value="${requestScope.ACCS}"/>
-    <c:if test="${not empty accs}">
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>No.</th><th>User ID</th><th>User Name</th><th>Password</th><th>Email</th>
-                    <th>Birthdate</th><th>isMod</th><th>isBanned</th><th>Avatar</th><th>Delete</th><th>Update</th>
-                </tr>
-            </thead> 
-            <tbody>
-            <c:forEach var="a" items="${accs}" varStatus="cnt">
-                <form action="MainController" method="post">
+        <c:set var="accs" value="${requestScope.ACCS}"/>
+        <c:if test="${not empty accs}">
+            <table border="1">
+                <thead>
                     <tr>
+                        <th>No.</th><th>User ID</th><th>User Name</th><th>Password</th><th>Email</th>
+                        <th>Birthdate</th><th>isMod</th><th>isBanned</th><th>Avatar</th><th>Delete</th><th>Update</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <c:forEach var="a" items="${accs}" varStatus="cnt">
+
+                        <tr>
+                    <form action="MainController" method="post">
                         <td>${cnt.index+1}</td>
                         <td>${a.getUser_id()}</td>
                         <td>
@@ -50,15 +51,14 @@
                             <img src="data:image/jpg;base64,${a.getAvatar()}" width="100" height="100" /><br/>
                             <input type="hidden" name="imgAvatar" value="${a.getAvatar()}">
                         </td>
-                        <td><a href="MainController?btAction=DeleteUser&pk=${a.getUsername()}&lastSearchUser=${requestScope.txtSearchUser}">Delete</a></td>
-                    <input type="hidden" name="LastSearchUser" value="${requestScope.txtSearchUser}"/>
-                    <td><input type="submit" name="btAction" value="Update"/></td>
-                    </tr>
-                </form>
+                        <td><a href="MainController?btAction=Delete&pk=${a.getUsername()}&lastSearchUser=${requestScope.txtSearchUser}">Delete</a></td>
+                        <input type="hidden" name="LastSearchUser" value="${requestScope.txtSearchUser}"/>
+                        <td><input type="submit" name="btAction" value="Update"/></td>
+                    </form>
+                </tr>
             </c:forEach>
-
-            </tbody>
-        </table>
-    </c:if>
+        </tbody>
+    </table>
+</c:if>
 </body>
 </html> 
